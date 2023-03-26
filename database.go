@@ -13,6 +13,7 @@ type Database struct {
 	connectionString string
 	Sql              *sql.DB
 	UserTable        *UsersTable
+	QueueTable       *QueueTable
 }
 
 func MakeDatabase() *Database {
@@ -20,6 +21,7 @@ func MakeDatabase() *Database {
 	database.connectionString = "postgres://go_project:rIo3Fc@95.140.159.168:5433/lib_service?sslmode=disable"
 	database.Sql = nil
 	database.UserTable = &UsersTable{_database: database}
+	database.QueueTable = &QueueTable{_database: database}
 	return database
 }
 
