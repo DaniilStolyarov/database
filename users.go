@@ -24,7 +24,7 @@ type UsersTable struct {
 	_database *Database
 }
 
-func (users_table UsersTable) insert(row usersRowInsert) {
+func (users_table UsersTable) Insert(row usersRowInsert) {
 	_, err := users_table._database.Sql.Exec(`insert into users (login, email, pass_hash, flags, confirm_token) values 
 	($1::varchar, $2::varchar, $3::varchar, $4::int, $5::varchar)`, row.login, row.email, row.pass_hash, row.flags, row.confirm_token)
 	if err != nil {
@@ -33,7 +33,7 @@ func (users_table UsersTable) insert(row usersRowInsert) {
 }
 
 // prints users table in console
-func (users_table UsersTable) show() {
+func (users_table UsersTable) Show() {
 	rows, err := users_table._database.Sql.Query("select * from users")
 	if err != nil {
 		panic(err)
@@ -57,8 +57,8 @@ func (users_table UsersTable) show() {
 	}
 }
 
-// create users table
-func (users_table UsersTable) create() {
+// Create users table
+func (users_table UsersTable) Create() {
 	_, err := users_table._database.Sql.Exec(`create table IF NOT EXISTS users
 	(	id serial PRIMARY KEY,
 		login varchar,
@@ -72,16 +72,16 @@ func (users_table UsersTable) create() {
 	}
 }
 
-// truncate users table
-func (users_table UsersTable) truncate() {
+// Truncate users table
+func (users_table UsersTable) Truncate() {
 	_, err := users_table._database.Sql.Exec(`truncate table users`)
 	if err != nil {
 		panic(err)
 	}
 }
 
-// drop users table
-func (users_table UsersTable) drop() {
+// Drop users table
+func (users_table UsersTable) Drop() {
 	_, err := users_table._database.Sql.Exec("drop table IF EXISTS users")
 	if err != nil {
 		panic(err)

@@ -21,8 +21,8 @@ func MakeDatabase() *Database {
 	return database
 }
 
-// start database if not started
-func (db *Database) start() {
+// Start database if not started
+func (db *Database) Start() {
 	if db.Sql != nil {
 		fmt.Printf("ERROR::DATABASE::START: can`t start database, it`s already connected")
 		return
@@ -34,8 +34,8 @@ func (db *Database) start() {
 	}
 }
 
-// close connection with database
-func (db *Database) close() {
+// Close connection with database
+func (db *Database) Close() {
 	defer db.Sql.Close()
 }
 
@@ -50,7 +50,7 @@ type dbTable struct {
 	rowSecurity sql.NullBool
 }
 
-func (db *Database) getTablesList() []dbTable {
+func (db *Database) GetTablesList() []dbTable {
 	rows, err := db.Sql.Query("SELECT * FROM pg_catalog.pg_tables where (tablename not like 'pg_%') and (tablename not like 'sql_%')")
 	if err != nil {
 		panic(err)
@@ -74,8 +74,8 @@ func (db *Database) getTablesList() []dbTable {
 }
 
 // prints names of all databases by space
-func (db *Database) showTablesList() {
-	tables := db.getTablesList()
+func (db *Database) ShowTablesList() {
+	tables := db.GetTablesList()
 	for i := range tables {
 		fmt.Println(tables[i].tableName.String)
 	}
