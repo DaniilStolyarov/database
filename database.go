@@ -10,7 +10,6 @@ var A string
 type Database struct {
 	connectionString string
 	Sql              *sql.DB
-	UserTable        *UsersTable
 }
 
 func MakeDatabase() *Database {
