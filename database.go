@@ -10,14 +10,14 @@ var A string
 type Database struct {
 	connectionString string
 	Sql              *sql.DB
-	userTable        *UsersTable
+	UserTable        *UsersTable
 }
 
 func MakeDatabase() *Database {
 	var database *Database = &Database{}
 	database.connectionString = "postgres://go_project:rIo3Fc@95.140.159.168:5433/lib_service?sslmode=disable"
 	database.Sql = nil
-	database.userTable = &UsersTable{_database: database}
+	database.UserTable = &UsersTable{_database: database}
 	return database
 }
 
